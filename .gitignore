@@ -17,3 +17,4 @@ config.php
 login.txt
 .idea
 .idea/*
+vendor/
