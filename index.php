@@ -79,7 +79,7 @@ $user_data['ibutton'] = $data[0]["ibutton"][0];
 		// Get the current user's info
 		window.current_user = <?php echo json_encode($user_data); ?>;
 		// Base URL of the API
-		var baseUrl = "<?php echo API_BASE_URL; ?>";
+		var baseUrl = "api/index.php?request=";
 		// Have the navbar collapse (on mobile) after a page is selected
 		document.addEventListener("DOMContentLoaded", function() {
 			jQuery('.navitem').click(function() {
