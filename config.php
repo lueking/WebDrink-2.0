@@ -11,5 +11,7 @@ define("DEBUG", true); // true for test mode, false for production
 define("DEBUG_USER_UID", "lueking"); // If DEBUG is `true`, the UID of the test user (probably your own)
 define("DEBUG_USER_CN", "Bon Contro"); // If DEBUG is `true`, the display name of the user (probably your own)
 
-define("USE_LOCAL_DRINK_SERVER", true); // If set to `true` and DEBUG is `true`, will use a mock Drink server for developing
+define("USE_LOCAL_DRINK_SERVER", false); // If set to `true` and DEBUG is `true`, will use a mock Drink server for developing
+
+//yo this closing tag is actually really important for now
 ?>
