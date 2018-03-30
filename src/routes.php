@@ -12,7 +12,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak([
         'authServerUrl' => 'https://sso.csh.rit.edu/auth',
         'realm' => 'csh',
-        'clientId' => '',
+        'clientId' => 'webdrink',
         'clientSecret' => '',
         'redirectUri' => 'webdrink-dev.csh.rit.edu'
     ]);
