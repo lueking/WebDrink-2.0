@@ -5,13 +5,9 @@ samples.sql
 drink_v2.sql
 drink_v2_schema.sql
 exceptions.txt
-poop/*
 utils/log_utils.php
 angular-1.2.2/*
 angular-1.2.2.zip
-api_methods.txt
-api/drink_api_old.php
-config.php
 */node_modules/
 *log.txt
 login.txt

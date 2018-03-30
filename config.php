@@ -6,7 +6,7 @@ define("LOCAL_DRINK_SERVER_URL", "http://localhost:3000"); // URL (and port) of 
 
 define("RATE_LIMIT_DROPS_DROP", 3); // Rate limit for /drops/drop
 
-define("DEBUG", true); // true for test mode, false for production
+define("DEBUG", false); // true for test mode, false for production
 
 define("DEBUG_USER_UID", "lueking"); // If DEBUG is `true`, the UID of the test user (probably your own)
 define("DEBUG_USER_CN", "Bon Contro"); // If DEBUG is `true`, the display name of the user (probably your own)

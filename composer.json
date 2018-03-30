@@ -1,0 +1,19 @@
+{
+    "name": "computersciencehouse/webdrink",
+    "description": "webdrink",
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.9",
+        "slim/php-view": "^2.0",
+        "stevenmaguire/oauth2-keycloak": "^2.0",
+        "monolog/monolog": "^1.17"
+    },
+    "autoload-dev": {
+        "psr-4": {
+
+        }
+    },
+    "config": {
+        "process-timeout" : 0
+    }
+}
