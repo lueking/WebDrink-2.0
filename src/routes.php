@@ -63,11 +63,6 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
 });
 
-$app->group('/v2', function () use ($app) {
-    $app->group('/test', function () use ($app) {
-        require __DIR__ . '/api/v2/test.php';
-    });
-});
 
 
 $app->group("/api", function (Request $request, Response $response, array $args) {
