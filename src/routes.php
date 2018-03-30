@@ -62,16 +62,3 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     //return $this->renderer->render($response, 'index.phtml', $args);
 
 });
-
-
-
-$app->group("/api", function (Request $request, Response $response, array $args) {
-    $this->group("/drops", function (Request $request, Response $response, array $args) {
-    });
-    $this->group("/items", function (Request $request, Response $response, array $args) {
-    });
-    $this->group("/machines", function (Request $request, Response $response, array $args) {
-    });
-    $this->group("/users", function (Request $request, Response $response, array $args) {
-    });
-});
