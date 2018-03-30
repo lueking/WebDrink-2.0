@@ -10,7 +10,7 @@ $app->getContainer();
 $app->get('/', function (Request $request, Response $response, array $args) {
 
     $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak([
-        'authServerUrl' => 'sso.csh.rit.edu',
+        'authServerUrl' => 'https://sso.csh.rit.edu',
         'realm' => 'csh',
         'redirectUri' => 'webdrink-dev.csh.rit.edu'
     ]);
