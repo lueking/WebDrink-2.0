@@ -10,8 +10,10 @@ $app->getContainer();
 $app->get('/', function (Request $request, Response $response, array $args) {
 
     $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak([
-        'authServerUrl' => 'https://sso.csh.rit.edu',
+        'authServerUrl' => 'https://sso.csh.rit.edu/auth',
         'realm' => 'csh',
+        'clientId' => '',
+        'clientSecret' => '',
         'redirectUri' => 'webdrink-dev.csh.rit.edu'
     ]);
 
@@ -23,7 +25,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
         header('Location: ' . $authUrl);
         exit;
 
-    // Check given state against previously stored one to mitigate CSRF attack
+        // Check given state against previously stored one to mitigate CSRF attack
     } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
 
         unset($_SESSION['oauth2state']);
