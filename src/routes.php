@@ -13,7 +13,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
         'clientId' => OIDC_CLIENT_ID,
         'clientSecret' => OIDC_CLIENT_SECRET,
         'scope' => 'openid',
-        'redirectUri' => 'webdrink-dev.csh.rit.edu'
+        'redirectUri' => 'https://webdrink-dev.csh.rit.edu'
     ]);
 
     if (!isset($_GET['code'])) {
