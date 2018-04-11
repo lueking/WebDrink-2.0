@@ -16,5 +16,13 @@ return [
             'level' => \Monolog\Logger::DEBUG,
         ],
 
-    ],
+        'keycloak' => [
+                'authServerUrl' => 'https://sso.csh.rit.edu/auth',
+                'realm' => 'csh',
+                'clientId' => 'webdrink',
+                'clientSecret' => '',
+                'scope' => 'openid',
+                'redirectUri' => 'webdrink-dev.csh.rit.edu'
+        ]
+    ]
 ];

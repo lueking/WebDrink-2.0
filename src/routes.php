@@ -3,19 +3,11 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-$app->getContainer();
-
 
 // Routes
 $app->get('/', function (Request $request, Response $response, array $args) {
 
-    $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak([
-        'authServerUrl' => 'https://sso.csh.rit.edu/auth',
-        'realm' => 'csh',
-        'clientId' => 'webdrink',
-        'clientSecret' => '',
-        'redirectUri' => 'webdrink-dev.csh.rit.edu'
-    ]);
+    $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak($this->getContainer()['settings']['keycloak']);
 
     if (!isset($_GET['code'])) {
 
