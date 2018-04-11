@@ -7,7 +7,14 @@ use Slim\Http\Response;
 // Routes
 $app->get('/', function (Request $request, Response $response, array $args) {
 
-    $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak($this->getContainer()['settings']['keycloak']);
+    $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak([
+        'authServerUrl' => OIDC_PROVIDER_URL,
+        'realm' => OIDC_PROVIDER_REALM,
+        'clientId' => OIDC_CLIENT_ID,
+        'clientSecret' => OIDC_CLIENT_SECRET,
+        'scope' => 'openid',
+        'redirectUri' => 'webdrink-dev.csh.rit.edu'
+    ]);
 
     if (!isset($_GET['code'])) {
 
