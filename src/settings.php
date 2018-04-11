@@ -17,10 +17,10 @@ return [
         ],
 
         'keycloak' => [
-                'authServerUrl' => 'https://sso.csh.rit.edu/auth',
-                'realm' => 'csh',
-                'clientId' => 'webdrink',
-                'clientSecret' => '',
+                'authServerUrl' => OIDC_PROVIDER_URL,
+                'realm' => OIDC_PROVIDER_REALM,
+                'clientId' => OIDC_CLIENT_ID,
+                'clientSecret' => OIDC_CLIENT_SECRET,
                 'scope' => 'openid',
                 'redirectUri' => 'webdrink-dev.csh.rit.edu'
         ]
