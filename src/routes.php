@@ -5,65 +5,24 @@ use Slim\Http\Response;
 
 
 // Routes
+
+$auth = new \WebDrink\Middleware\KeycloakMiddleware();
+
+//User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args) {
+    $auth = $request->getAttribute('auth');
 
-    $provider = new Stevenmaguire\OAuth2\Client\Provider\Keycloak([
-        'authServerUrl' => OIDC_PROVIDER_URL,
-        'realm' => OIDC_PROVIDER_REALM,
-        'clientId' => OIDC_CLIENT_ID,
-        'clientSecret' => OIDC_CLIENT_SECRET,
-        'scope' => 'openid',
-        'redirectUri' => 'https://webdrink-dev.csh.rit.edu/'
-    ]);
+    return $response->withJson(var_export($auth));
+    //return $this->renderer->render($response, 'index.twig', $args);
+})->add($auth);
 
-    if (!isset($_GET['code'])) {
+//Where to go to get an API key
+$app->get('/settings', function (Request $request, Response $response, array $args) {
 
-        // If we don't have an authorization code then get one
-        $authUrl = $provider->getAuthorizationUrl();
-        $_SESSION['oauth2state'] = $provider->getState();
-        header('Location: ' . $authUrl);
-        exit;
+})->add($auth);
 
-        // Check given state against previously stored one to mitigate CSRF attack
-    } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
+//Secret drink admin things
+$app->get('/admin', function (Request $request, Response $response, array $args) {
 
-        unset($_SESSION['oauth2state']);
-        exit('Invalid state, make sure HTTP sessions are enabled.');
+})->add($auth);
 
-    } else {
-
-        // Try to get an access token (using the authorization coe grant)
-        try {
-            $token = $provider->getAccessToken('authorization_code', [
-                'code' => $_GET['code']
-            ]);
-        } catch (Exception $e) {
-            exit('Failed to get access token: ' . $e->getMessage());
-        }
-
-        // Optional: Now you have a token you can look up a users profile data
-        try {
-
-            // We got an access token, let's now get the user's details
-            $user = $provider->getResourceOwner($token);
-
-            // Use these details to create a new profile
-            printf('Hello %s!', $user->getName());
-
-        } catch (Exception $e) {
-            exit('Failed to get resource owner: ' . $e->getMessage());
-        }
-
-        // Use this to interact with an API on the users behalf
-        return $response->withJson($token->getToken());
-    }
-
-
-    // Render index view
-    //return $this->renderer->render($response, 'index.phtml', $args);
-
-});
-
-$app->get('/auth', function (Request $request, Response $response, array $args) {
-    return $response->withJson("henlo");
-});
