@@ -18,7 +18,7 @@ $provider = new Keycloak([
 ]);
 
 //User route, this is the normal view
-$app->get('/', function (Request $request, Response $response, array $args) use ($provider){
+$app->get('', function (Request $request, Response $response, array $args) use ($provider){
 
     if (is_null( $request->getAttribute('code'))) {
         $provider->authorize();
