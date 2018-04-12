@@ -4,7 +4,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 // Routes
-$app->group('', function (Request $request, Response $response, array $args) use ($app) {
+$app->group('', function () use ($app) {
 
     $auth = new \WebDrink\Middleware\AuthMiddleware();
 
