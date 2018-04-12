@@ -31,9 +31,9 @@ define("LDAP_HOST", $get_data(getenv("LDAP_HOST"), 'ldap.csh.rit.edu'));
 define("RATE_LIMIT_DROPS_DROP", $get_data(getenv("RATE_LIMIT_DROPS_DROP"), 3)); // Rate limit for /drops/drop
 
 //Development configuration
-define("DEBUG", filter_var($get_data(getenv("DEBUG"), true), FILTER_VALIDATE_BOOLEAN)); // true for test mode, false for production
+define("DEBUG", filter_var($get_data(getenv("DEBUG"), false), FILTER_VALIDATE_BOOLEAN)); // true for test mode, false for production
 define("DEBUG_USER_UID", $get_data(getenv("DEBUG_USER_UID"), 'potate')); // If DEBUG is `true`, the UID of the test user (probably your own)
 define("DEBUG_USER_CN", $get_data(getenv("DEBUG_USER_CN"), 'Pontus the Potato')); // If DEBUG is `true`, the display name of the user (probably your own)
-define("USE_LOCAL_DRINK_SERVER", $get_data(getenv("USE_LOCAL_DRINK_SERVER"), true)); // If set to `true` and DEBUG is `true`, will use a mock Drink server for developing
+define("USE_LOCAL_DRINK_SERVER", $get_data(getenv("USE_LOCAL_DRINK_SERVER"), false)); // If set to `true` and DEBUG is `true`, will use a mock Drink server for developing
 
 ?>
