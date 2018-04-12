@@ -8,9 +8,9 @@
         "stevenmaguire/oauth2-keycloak": "^2.0",
         "monolog/monolog": "^1.17"
     },
-    "autoload-dev": {
+    "autoload": {
         "psr-4": {
-
+          "WebDrink\\" : "src/"
         }
     },
     "config": {
