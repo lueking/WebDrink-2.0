@@ -2,14 +2,11 @@
 
 namespace WebDrink\Middleware;
 
-require_once("./../../vendor/autoload.php");
-
 use Slim\Http\Request;
 use Slim\Http\Response;
 use \Stevenmaguire\OAuth2\Client\Provider\Keycloak;
 
 class KeycloakMiddleware {
-
 
     public function __invoke(Request $request, Response $response, $next) {
         $provider = new Keycloak([
