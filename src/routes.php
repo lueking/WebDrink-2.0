@@ -14,11 +14,10 @@ $app->get('/', function (Request $request, Response $response, array $args){
 
     $info = $auth->requestUserInfo();
 
-    $args['username'] = $info['preferred_username'];
-    $args['drinkadmin'] = !empty($info['groups']['drink']);
-
-
-    return $response->withJson($args);
+    return $response->withJson([
+        "username" => $info['preferred_username'],
+        "drinkadmin" => in_array('drink', $info['groups'])
+    ]);
     //return $this->renderer->render($response, 'index.twig', $args);
 })->add($auth);
 
