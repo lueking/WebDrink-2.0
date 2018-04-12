@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDrinkAPI\Utils;
+namespace WebDrink\Utils;
 
 use Jumbojett\OpenIDConnectClient;
 
