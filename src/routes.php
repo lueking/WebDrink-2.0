@@ -12,7 +12,11 @@ $auth = new \WebDrink\Middleware\AuthMiddleware();
 $app->get('/', function (Request $request, Response $response, array $args){
     $auth = $request->getAttribute('auth');
 
-    $args = $auth->requestUserInfo();
+    $info = $auth->requestUserInfo();
+
+    $args['username'] = $info['preferred_username'];
+    $args['drinkadmin'] = !empty($info['groups']['drink']);
+
 
     return $response->withJson($args);
     //return $this->renderer->render($response, 'index.twig', $args);
