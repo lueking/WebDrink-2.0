@@ -4,7 +4,7 @@ namespace WebDrink\Middleware;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use WebDrinkAPI\Utils\OIDC;
+use WebDrink\Utils\OIDC;
 
 class AuthMiddleware {
     public function __invoke(Request $request, Response $response, $next) {
