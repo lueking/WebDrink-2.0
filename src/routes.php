@@ -6,15 +6,23 @@ use Slim\Http\Response;
 
 // Routes
 
+$app->add(new \WebDrink\Middleware\KeycloakMiddleware());
 
 
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args) {
-    $auth = new \WebDrink\Middleware\KeycloakMiddleware();
+    $auth = $request->getAttribute('auth');
 
-    return $response->withJson(var_export($auth));
+    $token = $auth->getAccessToken('authorization_code', [
+        'code' => $_GET['code']
+    ]);
+
+    $user = $auth->getResourceOwner($token);
+
+    return $response->withJson($user->getName());
     //return $this->renderer->render($response, 'index.twig', $args);
 });
+
 
 //Where to go to get an API key
 $app->get('/settings', function (Request $request, Response $response, array $args) {

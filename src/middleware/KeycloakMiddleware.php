@@ -9,7 +9,7 @@ use \Stevenmaguire\OAuth2\Client\Provider\Keycloak;
 class KeycloakMiddleware {
 
     public function __invoke(Request $request, Response $response, $next) {
-        $provider = new Keycloak([
+        $auth = new Keycloak([
             'authServerUrl' => OIDC_PROVIDER_URL,
             'realm' => OIDC_PROVIDER_REALM,
             'clientId' => OIDC_CLIENT_ID,
@@ -18,9 +18,9 @@ class KeycloakMiddleware {
             'redirectUri' => 'https://webdrink-dev.csh.rit.edu/'
         ]);
 
-        $provider->authorize();
+        $auth->authorize();
 
-        $request = $request->withAttribute('provider', $provider);
+        $request = $request->withAttribute('auth', $auth);
 
         return $next($request, $response);
     }
