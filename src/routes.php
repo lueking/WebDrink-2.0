@@ -8,16 +8,15 @@ use Slim\Http\Response;
 
 $auth = new \WebDrink\Middleware\AuthMiddleware();
 
-$app->get('/auth', function (Request $request, Response $response, array $args){
-    return $response->withJson("snort");
-})->add($auth);
-
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args){
-    return $response->withJson("bork");
+    $auth = $request->getAttribute('auth');
+
+    $args = $auth->requestUserInfo();
+
+    return $response->withJson($args);
+    //return $this->renderer->render($response, 'index.twig', $args);
 })->add($auth);
-
-
 
 
 //Where to go to get an API key
