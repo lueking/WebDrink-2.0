@@ -21,7 +21,61 @@
 
 </head>
 <body>
-    {% include 'navbar.twig' %}
-    {% include 'machines.twig' %}
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li class="navitem"><a href="">Machines</a></li>
+        <li class="navitem"><a href="">Settings</a></li>
+        {% if drinkadmin %}
+            <li class="navitem"><a href="">Admin</a>
+                <ul class="dropdown-menu">
+                    <li><a class="navitem" href="/users">Users</a></li>
+                    <li><a class="navitem" href="/items">Items</a></li>
+                    <li><a class="navitem" href="/temps">Temps</a></li>
+                    <li><a class="navitem" href="/logs">Logs</a></li>
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navitem">
+            <a href="/drops">
+                {{ username }} Credit{% if credits not 0 %}s{% endif %}
+            </a>
+        </li>
+    </ul>
+</div>
+{% for machine in machines %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ machine.display_name }}</h3>
+        </div>
+        <table class="table table-striped">
+            <tr><th>Item</th><th>Price</th><th class="actions">Actions</th>
+                {% for slot in machine.slots %}
+            <tr class={{ slot.enabled ? 'enabled' : 'disabled' }} >
+                <td class="item">{{ slot.name }}</td>
+                <td class="price">{{ slot.price }}</td>
+                <td class="">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ (slot.status === 'disabled') || (slot.available === 0) || (credits < slot.price)) ? 'disabled' : }}>
+                        Drop
+                    </button>
+                    {% if drinkadmin %}
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editSlotModal">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endfor %}
 </body>
 </html>
