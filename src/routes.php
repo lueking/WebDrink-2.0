@@ -22,12 +22,17 @@ $app->get('/', function (Request $request, Response $response, array $args){
                     [
                         "price" => 69,
                         "name" => "urmom",
-                        "enabled" => "true"
+                        "enabled" => "true",
+                        "status" => "true",
+                        "availible" => "true"
+
                     ],
                     [
                         "price" => 999,
                         "name" => "urdad",
-                        "enabled" => "false"
+                        "enabled" => "false",
+                        "status" => "true",
+                        "availible" => "true"
                     ]
                 ],
                 "display_name" => "big boy"

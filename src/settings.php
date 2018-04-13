@@ -14,15 +14,6 @@ return [
             'name' => 'slim-app',
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
-        ],
-
-        'keycloak' => [
-                'authServerUrl' => OIDC_PROVIDER_URL,
-                'realm' => OIDC_PROVIDER_REALM,
-                'clientId' => OIDC_CLIENT_ID,
-                'clientSecret' => OIDC_CLIENT_SECRET,
-                'scope' => 'openid',
-                'redirectUri' => 'webdrink-dev.csh.rit.edu'
         ]
     ]
 ];
