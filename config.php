@@ -16,7 +16,7 @@ define("DB_HOST", $get_data(getenv("DB_HOST"), 'localhost'));
 define("DB_DRIVER", $get_data(getenv("DB_DRIVER"), 'pdo_mysql'));
 
 //OpenId configuration
-define("OIDC_PROVIDER_URL", $get_data(getenv("OIDC_PROVIDER_URL"), 'https://sso.csh.rit.edu/auth/'));
+define("OIDC_PROVIDER_URL", $get_data(getenv("OIDC_PROVIDER_URL"), 'https://sso.csh.rit.edu/auth'));
 define("OIDC_PROVIDER_REALM", $get_data(getenv("OIDC_PROVIDER_REALM"), 'csh'));
 define("OIDC_CLIENT_ID", $get_data(getenv("OIDC_CLIENT_ID"), 'webdrink'));
 define("OIDC_CLIENT_SECRET", $get_data(getenv("OIDC_CLIENT_SECRET"), ''));
