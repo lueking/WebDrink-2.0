@@ -3,18 +3,17 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-// Routes
 
-
-$auth = new \WebDrink\Middleware\AuthMiddleware();
+$app->add(new \WebDrink\Middleware\AuthMiddleware());
 
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args){
-    $auth = $request->getAttribute('auth');
+    $userinfo = $request->getAttribute('userdata')['userinfo'];
+
 
     $ass = [
-        "username" => $auth->requestUserInfo('preferred_username'),
-        "drinkadmin" => in_array('drink', $auth->requestUserInfo('groups')),
+        "username" => "butts",
+        "drinkadmin" => false,
         "credits" => 420,
         "machines" => [
             "big" => [
@@ -40,10 +39,14 @@ $app->get('/', function (Request $request, Response $response, array $args){
         ]
     ];
 
-    return $this->renderer->render($response, 'index.twig', $ass);
+    return $response->withJson($userinfo, null, true);
     //return $this->renderer->render($response, 'index.twig', $args);
-})->add($auth);
+});
 
+//callback url for auth? that we just use to get rid of those nasty get vars
+$app->get('/auth', function (Request $request, Response $response, array $args) {
+    $response->withRedirect('/');
+});
 
 //Where to go to get an API key
 $app->get('/settings', function (Request $request, Response $response, array $args) {
