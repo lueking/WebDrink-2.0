@@ -11,11 +11,13 @@ $auth = new \WebDrink\Middleware\AuthMiddleware();
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args){
     $auth = $request->getAttribute('auth');
-    
-    return $response->withJson([
+
+    $ass = [
         "username" => $auth->requestUserInfo('preferred_username'),
         "drinkadmin" => in_array('drink', $auth->requestUserInfo('groups'))
-    ]);
+    ];
+
+    return $response->withJson($ass, null, true);
     //return $this->renderer->render($response, 'index.twig', $args);
 })->add($auth);
 
