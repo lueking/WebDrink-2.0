@@ -46,7 +46,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li class="navitem">
             <a href="/drops">
-                {{ username }} Credit{% if credits not 0 %}s{% endif %}
+                {{ username }} Credits
             </a>
         </li>
     </ul>
@@ -58,7 +58,7 @@
         </div>
         <table class="table table-striped">
             <tr><th>Item</th><th>Price</th><th class="actions">Actions</th>
-                {% for slot in machine.slots %}
+            {% for slot in machine.slots %}
             <tr class={{ slot.enabled ? 'enabled' : 'disabled' }} >
                 <td class="item">{{ slot.name }}</td>
                 <td class="price">{{ slot.price }}</td>
