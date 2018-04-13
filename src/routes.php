@@ -14,10 +14,28 @@ $app->get('/', function (Request $request, Response $response, array $args){
 
     $ass = [
         "username" => $auth->requestUserInfo('preferred_username'),
-        "drinkadmin" => in_array('drink', $auth->requestUserInfo('groups'))
+        "drinkadmin" => in_array('drink', $auth->requestUserInfo('groups')),
+        "credits" => 420,
+        "machines" => [
+            "big" => [
+                "slots" => [
+                    [
+                        "price" => 69,
+                        "name" => "urmom",
+                        "enabled" => "true"
+                    ],
+                    [
+                        "price" => 999,
+                        "name" => "urdad",
+                        "enabled" => "false"
+                    ]
+                ],
+                "display_name" => "big boy"
+            ],
+        ]
     ];
 
-    return $response->withJson($ass, null, true);
+    return $this->renderer->render($response, 'index.twig', $ass);
     //return $this->renderer->render($response, 'index.twig', $args);
 })->add($auth);
 
