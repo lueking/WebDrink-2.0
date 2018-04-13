@@ -1,0 +1,26 @@
+{% for machine in machines %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ machine.display_name }}</h3>
+    </div>
+    <table class="table table-striped">
+        <tr><th>Item</th><th>Price</th><th class="actions">Actions</th>
+        {% for slot in machine.slots %}
+        <tr class={{ slot.enabled ? 'enabled' : 'disabled' }} >
+            <td class="item">{{ slot.name }}</td>
+            <td class="price">{{ slot.price }}</td>
+            <td class="">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ (slot.status === 'disabled') || (slot.available === 0) || (credits < slot.price)) ? 'disabled' : }}>
+                    Drop
+                </button>
+                {% if drinkadmin %}
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editSlotModal">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endfor %}

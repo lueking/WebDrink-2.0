@@ -1,0 +1,30 @@
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li class="navitem"><a href="">Machines</a></li>
+        <li class="navitem"><a href="">Settings</a></li>
+        {% if drinkadmin %}
+        <li class="navitem"><a href="">Admin</a>
+            <ul class="dropdown-menu">
+                <li><a class="navitem" href="/users">Users</a></li>
+                <li><a class="navitem" href="/items">Items</a></li>
+                <li><a class="navitem" href="/temps">Temps</a></li>
+                <li><a class="navitem" href="/logs">Logs</a></li>
+            </ul>
+        </li>
+        {% endif %}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navitem">
+            <a href="/drops">
+                {{ username }} Credit{% if credits not 0 %}s{% endif %}
+            </a>
+        </li>
+    </ul>
+</div>
