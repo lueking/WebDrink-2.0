@@ -2,50 +2,84 @@
 
 namespace WebDrink\Middleware;
 
+use League\OAuth2\Client\Token\AccessToken;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Stevenmaguire\OAuth2\Client\Provider\Keycloak;
-use WebDrink\Utils\OIDC;
 
 class AuthMiddleware {
 
-    private $token;
     private $provider;
 
     public function __construct() {
-        $this->provider = new Keycloak([
-            'authServerUrl' => OIDC_PROVIDER_URL,
-            'realm' => OIDC_PROVIDER_REALM,
-            'clientId' => OIDC_CLIENT_ID,
-            'clientSecret' => OIDC_CLIENT_SECRET,
-            'scope' => 'openid',
-            'redirectUri' => 'https://webdrink-dev.csh.rit.edu/auth'
-        ]);
+        $keycloak = new \WebDrink\Utils\Keycloak();
+        $this->provider = $keycloak->getProvider();
     }
 
     public function __invoke(Request $request, Response $response, $next) {
 
-        //first step is making sure we have a code
-        if(empty($request->getAttribute('code')) && empty($this->token)){
+        //if we don't have a token, go get one
+        if($this->needsAuth()){
             $this->provider->authorize();
             exit();
         }
-        //then, we should get a token from our code
-        if(empty($this->token)){
-            $this->token = $this->provider->getAccessToken('authorization_code', ['code' => $request->getAttribute('code')]);
-        }
-        //need to check if we need to renew our token
-        if($this->token->hasExpired()) {
-            $this->token = $this->provider->getAccessToken('refresh_token', ['refresh_token' => $this->token->getRefreshToken()]);
-        }
 
         //save the token and the username
-        $request = $request->withAttribute('userdata', [
-            "token" => $this->token,
-            "userinfo" => $this->provider->getResourceOwner($this->token)
+        $user = $this->provider->getResourceOwner($this->getToken());
+        $request = $request->withAttribute('user_info', [
+            'username' => $user->toArray()['preferred_username'],
+            'drinkAdmin' => in_array('drink', $user->toArray()['groups'])
         ]);
 
-
         return $next($request, $response);
+    }
+    function setTokenFromAccessCode(String $code){
+        $token = $this->provider->getAccessToken('authorization_code', [
+            'code' => $code
+        ]);
+        $_SESSION['token'] = $token->jsonSerialize();
+        $_SESSION['auth_user'] = $token->getResourceOwnerId();
+    }
+
+    function getProvider(){
+        return $this->provider;
+    }
+
+    private function getToken(){
+        return new AccessToken(json_decode($_SESSION['token'], true));
+    }
+
+    function needsAuth(){
+
+        //do we have a token?
+        if(isset($_SESSION['token'])){
+            $token = null;
+
+            //try to load the token from the session var.
+            try {
+                $token = $this->getToken();
+            } catch (\Exception $ex) {
+                unset($_SESSION['token']);
+                return true;
+            }
+
+            //is that token expired?
+            if($token->hasExpired()){
+                //refresh and save the token
+                $token = $this->provider->getAccessToken('refresh_token', ['refresh_token' => $token->getRefreshToken()]);
+                $_SESSION['token'] = $token->jsonSerialize();
+            }
+
+            //make sure the token we have is for the right user
+            if(strcmp($token->getResourceOwnerId(), $_SESSION['auth_user']) !== 0){
+                //b&
+                unset($_SESSION['token']);
+                unset($_SESSION['auth_user']);
+                return true;
+            }
+
+            return false;
+        } else {
+            return true;
+        }
     }
 }
