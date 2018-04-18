@@ -36,7 +36,7 @@ class AuthMiddleware {
         $token = $this->provider->getAccessToken('authorization_code', [
             'code' => $code
         ]);
-        $_SESSION['token'] = $token->jsonSerialize();
+        setcookie('token', $token->jsonSerialize());
         $_SESSION['auth_user'] = $token->getResourceOwnerId();
     }
 
@@ -45,20 +45,20 @@ class AuthMiddleware {
     }
 
     private function getToken(){
-        return new AccessToken(json_decode($_SESSION['token'], true));
+        return new AccessToken(json_decode($_COOKIE['token'], true));
     }
 
     function needsAuth(){
 
         //do we have a token?
-        if(isset($_SESSION['token'])){
+        if(isset($_COOKIE['token'])){
             $token = null;
 
             //try to load the token from the session var.
             try {
                 $token = $this->getToken();
             } catch (\Exception $ex) {
-                unset($_SESSION['token']);
+                unset($_COOKIE['token']);
                 return true;
             }
 
@@ -66,13 +66,13 @@ class AuthMiddleware {
             if($token->hasExpired()){
                 //refresh and save the token
                 $token = $this->provider->getAccessToken('refresh_token', ['refresh_token' => $token->getRefreshToken()]);
-                $_SESSION['token'] = $token->jsonSerialize();
+                $_COOKIE['token'] = $token->jsonSerialize();
             }
 
             //make sure the token we have is for the right user
-            if(strcmp($token->getResourceOwnerId(), $_SESSION['auth_user']) !== 0){
+            if(strcmp($token->getResourceOwnerId(), $_COOKIE['auth_user']) !== 0){
                 //b&
-                unset($_SESSION['token']);
+                unset($_COOKIE['token']);
                 unset($_SESSION['auth_user']);
                 return true;
             }
