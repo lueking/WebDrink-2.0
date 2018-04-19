@@ -20,8 +20,9 @@ $app->get('/', function (Request $request, Response $response, array $args){
 
     $access_token = $auth->getAccessToken();
     $token_response = $auth->getTokenResponse();
+    $access_token_header = $auth->getAccessTokenHeader();
 
-    return $response->withJson([$access_token, $token_response]);
+    return $response->withJson([$access_token, $token_response, $access_token_header]);
 })->add($auth);
 
 
