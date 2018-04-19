@@ -2,7 +2,7 @@
     "name": "computersciencehouse/webdrink",
     "description": "webdrink",
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.0.10",
         "slim/slim": "^3.9",
         "slim/php-view": "^2.0",
         "monolog/monolog": "^1.17",
