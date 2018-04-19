@@ -18,9 +18,11 @@ $app->get('/', function (Request $request, Response $response, array $args){
 
     $auth = $request->getAttribute('auth');
 
-    $info = $auth->requestUserInfo();
+    $access_token = $auth->getAcessToken();
+    $id_token = $auth->getIdToken();
+    $refreshToken = $auth->getRefreshToken();
 
-    return $response->withJson($info);
+    return $response->withJson([$access_token, $id_token, $refreshToken]);
 })->add($auth);
 
 
