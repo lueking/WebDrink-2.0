@@ -13,12 +13,14 @@ class OIDCMiddleware {
         // Makes route Require Auth
         $oidc = new OIDC();
         $auth = $oidc->getAuth();
-        $auth->authenticate();
+
+        //if we have an access token, then we're good.
+        if(!isset($_SESSION['access_token']) && $auth->authenticate() ){
+            $oidc->saveToken();
+        }
 
         $request = $request->withAttribute('auth', $auth);
 
         return $next($request, $response);
-
-
     }
 }

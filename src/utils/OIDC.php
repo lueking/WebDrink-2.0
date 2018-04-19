@@ -17,4 +17,9 @@ class OIDC {
     public function getAuth() {
         return $this->oidc;
     }
+
+    public function saveToken(){
+        $_SESSION['access_token'] = $this->oidc->getAccessToken();
+        $_SESSION['token_info'] =$this->oidc->getTokenResponse();
+    }
 }

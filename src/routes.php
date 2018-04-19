@@ -8,7 +8,9 @@ use Slim\Http\Response;
 
 //callback url for auth from oidc
 $app->get('/auth', function (Request $request, Response $response, array $args){
-    return $response->withJson('redirected ass');
+
+
+    return $response->withRedirect('/');
 });
 
 $auth = new \WebDrink\Middleware\OIDCMiddleware();
@@ -16,13 +18,7 @@ $auth = new \WebDrink\Middleware\OIDCMiddleware();
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args){
 
-    $auth = $request->getAttribute('auth');
-
-    $access_token = $auth->getAccessToken();
-    $token_response = $auth->getTokenResponse();
-    $access_token_header = $auth->getAccessTokenHeader();
-
-    return $response->withJson([$access_token, $token_response, $access_token_header]);
+    return $response->withJson([$_SESSION['access_token']]);
 })->add($auth);
 
 
