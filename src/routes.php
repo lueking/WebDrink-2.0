@@ -16,7 +16,11 @@ $auth = new \WebDrink\Middleware\OIDCMiddleware();
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args){
 
-    return $response->withJson('asss');
+    $auth = $request->getAttribute('auth');
+
+    $info = $auth->requestUserInfo();
+
+    return $response->withJson($info);
 })->add($auth);
 
 
