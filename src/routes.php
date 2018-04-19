@@ -19,10 +19,9 @@ $app->get('/', function (Request $request, Response $response, array $args){
     $auth = $request->getAttribute('auth');
 
     $access_token = $auth->getAccessToken();
-    $id_token = $auth->getIdToken();
-    $refreshToken = $auth->getRefreshToken();
+    $token_response = $auth->getTokenResponse();
 
-    return $response->withJson([$access_token, $id_token, $refreshToken]);
+    return $response->withJson([$access_token, $token_response]);
 })->add($auth);
 
 
