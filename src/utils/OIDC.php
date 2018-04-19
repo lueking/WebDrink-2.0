@@ -11,7 +11,7 @@ class OIDC {
     public function __construct() {
         $this->oidc = new OpenIDConnectClient(OIDC_PROVIDER_URL, OIDC_CLIENT_ID, OIDC_CLIENT_SECRET);
         $this->oidc->addScope('openid');
-        $this->oidc->setRedirectURL('https://webdrink-dev.csh.rit.edu/');
+        $this->oidc->setRedirectURL('https://webdrink-dev.csh.rit.edu/auth');
     }
 
     public function getAuth() {
