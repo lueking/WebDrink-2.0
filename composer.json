@@ -2,15 +2,12 @@
     "name": "computersciencehouse/webdrink",
     "description": "webdrink",
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=7.1.0",
         "slim/slim": "^3.9",
         "slim/php-view": "^2.0",
-        "stevenmaguire/oauth2-keycloak": "^2.0",
         "monolog/monolog": "^1.17",
         "jumbojett/openid-connect-php": "^0.5.0",
-        "gnumoksha/php-freeipa": "^0.2.0",
-        "slim/twig-view": "^2.3",
-        "tuupola/slim-jwt-auth": "^2.4"
+        "slim/twig-view": "^2.3"
     },
     "autoload": {
         "psr-4": {

@@ -22,10 +22,10 @@ define("OIDC_CLIENT_ID", $get_data(getenv("OIDC_CLIENT_ID"), 'webdrink'));
 define("OIDC_CLIENT_SECRET", $get_data(getenv("OIDC_CLIENT_SECRET"), ''));
 
 //LDAP configuration
-define("LDAP_USER", $get_data(getenv("LDAP_USER"), 'uid=webdrink'));
+define("LDAP_USER", $get_data(getenv("LDAP_USER"), ''));
 define("LDAP_PASS", $get_data(getenv("LDAP_PASS"), ''));
 define("LDAP_APP", filter_var($get_data(getenv("LDAP_APP"), false), FILTER_VALIDATE_BOOLEAN));
-define("LDAP_HOST", $get_data(getenv("LDAP_HOST"), 'ldap.csh.rit.edu'));
+define("LDAP_HOST", $get_data(getenv("LDAP_HOST"), 'csh-ds01.csh.rit.edu'));
 
 //Rate limit delays (one call per X seconds)
 define("RATE_LIMIT_DROPS_DROP", $get_data(getenv("RATE_LIMIT_DROPS_DROP"), 3)); // Rate limit for /drops/drop

@@ -36,18 +36,6 @@ $app->get('/', function (Request $request, Response $response, array $args){
     ];
 
 
-    return $this->view->render($response, 'index.twig', $info);
+    return $this->view->render($response, 'webdrink.twig', $info);
 })->add($auth);
-
-
-//Where to go to get an API key
-$app->get('/settings', function (Request $request, Response $response, array $args) {
-
-});
-
-//Secret drink admin things
-$app->get('/admin', function (Request $request, Response $response, array $args) {
-
-});
-
 
