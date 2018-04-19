@@ -3,11 +3,6 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-
-
-
-
-
 $auth = new \WebDrink\Middleware\OIDCMiddleware();
 
 //callback url for auth from oidc, mostly to strip the get vars
@@ -21,8 +16,8 @@ $app->get('/', function (Request $request, Response $response, array $args){
     $user_info = $provider->requestUserInfo();
 
     $info = [
-        'username' =>  (array) $user_info['preferred_username'],
-        'drinkadmin' => in_array('drink', $user_info['groups']),
+        'username' => $user_info->preferred_username,
+        'drinkadmin' => in_array('drink', $user_info->groups),
         'credits' => 420,
         'machines' => [
             [
