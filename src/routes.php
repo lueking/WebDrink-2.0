@@ -21,7 +21,7 @@ $app->get('/', function (Request $request, Response $response, array $args){
     $user_info = $provider->requestUserInfo();
 
     $info = [
-        'username' => $user_info['preferred_username'],
+        'username' =>  (array) $user_info['preferred_username'],
         'drinkadmin' => in_array('drink', $user_info['groups']),
         'credits' => 420,
         'machines' => [
@@ -32,7 +32,7 @@ $app->get('/', function (Request $request, Response $response, array $args){
                         'name' => 'baaallls',
                         'price' => 9001,
                         'enabled' => true,
-                        'availible' => 1,
+                        'availible' => 1
                     ]
                 ]
             ]
