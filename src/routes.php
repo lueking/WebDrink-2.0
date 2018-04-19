@@ -6,14 +6,16 @@ use Slim\Http\Response;
 
 
 
+
+
+$auth = new \WebDrink\Middleware\OIDCMiddleware();
+
 //callback url for auth from oidc
 $app->get('/auth', function (Request $request, Response $response, array $args){
 
 
     return $response->withRedirect('/');
-});
-
-$auth = new \WebDrink\Middleware\OIDCMiddleware();
+})->add($auth);
 
 //User route, this is the normal view
 $app->get('/', function (Request $request, Response $response, array $args){
