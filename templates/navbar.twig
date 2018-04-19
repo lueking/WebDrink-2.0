@@ -1,30 +1,43 @@
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+{% extends "index.twig" %}
+{% block nav %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">WebDrink</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+        <span class="navbar-toggler-icon"></span>
     </button>
-</div>
-<div id="navbar" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-        <li class="navitem"><a href="">Machines</a></li>
-        <li class="navitem"><a href="">Settings</a></li>
-        {% if drinkadmin %}
-        <li class="navitem"><a href="">Admin</a>
-            <ul class="dropdown-menu">
-                <li><a class="navitem" href="/users">Users</a></li>
-                <li><a class="navitem" href="/items">Items</a></li>
-                <li><a class="navitem" href="/temps">Temps</a></li>
-                <li><a class="navitem" href="/logs">Logs</a></li>
-            </ul>
-        </li>
-        {% endif %}
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li class="navitem">
-            <a href="/drops">
-                {{ username }} Credit{% if credits not 0 %}s{% endif %}
-            </a>
-        </li>
-    </ul>
-</div>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+            {% if drinkadmin %}
+            <li class="nav-item">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">Admin<span class="caret"></span></a>
+                        <div class="dropdown-menu" >
+                            <a class="dropdown-item" href="/users">Users</a>
+                            <a class="dropdown-item" href="/items">Items</a>
+                            <a class="dropdown-item" href="/temps">Temps</a>
+                            <a class="dropdown-item" href="/logs">Logs</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item navbar-user dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" id="user01">
+                    <img src="https://profiles.csh.rit.edu/image/test">
+                    Testing Tester
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}

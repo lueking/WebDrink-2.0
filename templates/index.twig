@@ -1,89 +1,45 @@
-<!DOCTYPE HTML>
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>WebDrink</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>WebDrink!</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://s3.csh.rit.edu/csh-material-bootstrap/4.0.0/dist/csh-material-bootstrap.min.css" media="screen">
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css"/>
-    <link href="css/main.css" rel="stylesheet" media="screen" type="text/css"/>
-    <link href="css/members-flat.min.css" rel="stylesheet" media="screen" type="text/css"/>
-    <link href="css/purple-theme.css" id="purpleThemeCSS" rel="stylesheet" media="screen" type="text/css"/>
-    <link href="css/pink-theme.css" id="pinkThemeCSS" rel="stylesheet" media="screen" type="text/css"/>
-    <style type="text/css">
-        body {
-            padding-top: 70px;
-            min-width: 320px;
+    <style>
+        .container {
+            padding-top: 15px
         }
     </style>
 
-
 </head>
+
 <body>
-<header class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="navitem"><a href="">Machines</a></li>
-                <li class="navitem"><a href="">Settings</a></li>
-                {% if drinkadmin %}
-                    <li class="navitem"><a href="">Admin</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="navitem" href="/users">Users</a></li>
-                            <li><a class="navitem" href="/items">Items</a></li>
-                            <li><a class="navitem" href="/temps">Temps</a></li>
-                            <li><a class="navitem" href="/logs">Logs</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="navitem">
-                    <a href="/drops">
-                        {{ username }} ({{credits}} Credits)
-                    </a>
-                </li>
-            </ul>
-        </div>
-        {% for machine in machines %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ machine.display_name }}</h3>
-                </div>
-                <table class="table table-striped">
-                    <tr><th>Item</th><th>Price</th><th class="actions">Actions</th>
-                    {% for slot in machine.slots %}
-                    <tr>
-                        <td class="item">{{ slot.name }}</td>
-                        <td class="price">{{ slot.price }}</td>
-                        <td class="">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ ((slot.enabled == false) or (slot.available == 0) or (credits < slot.price)) ? 'disabled' : ''}}>
-                                Drop
-                            </button>
-                            {% if drinkadmin %}
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editSlotModal">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        {% endfor %}
+
+<!-- Navigation -->
+{% block nav %}
+{% endblock %}
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        {% block machines %}
+        {% endblock %}
     </div>
-</header>
+</div>
+
+
 </body>
+
 </html>
