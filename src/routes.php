@@ -18,7 +18,7 @@ $app->get('/', function (Request $request, Response $response, array $args){
 
     $info = [
         'username' => $user_info->preferred_username,
-        'drinkadmin' => 'lueking',
+        'drinkadmin' => true,
         'credits' => 420,
         'machines' => [
             [
