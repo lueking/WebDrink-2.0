@@ -28,12 +28,83 @@
 <body>
 
 <!-- Navigation -->
-{% include 'navbar.twig' %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">WebDrink</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+            {% if drinkadmin %}
+                <li class="nav-item">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">Admin<span class="caret"></span></a>
+                            <div class="dropdown-menu" >
+                                <a class="dropdown-item" href="/users">Users</a>
+                                <a class="dropdown-item" href="/items">Items</a>
+                                <a class="dropdown-item" href="/temps">Temps</a>
+                                <a class="dropdown-item" href="/logs">Logs</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item navbar-user dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" id="user01">
+                    <img src="https://profiles.csh.rit.edu/image/test">
+                    Testing Tester
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        {% include 'machines.twig' %}
+        {% for machine in machines %}
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ machine.display_name }}</h3>
+                        </div>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th class="actions">Actions</th>
+                            <tr class={{ slot.enabled ? 'enabled' : 'disabled' }} >
+                                {% for slot in machine.slots %}
+                                    <td>{{ slot.name  }}</td>
+                                    <td>{{ slot.price }}</td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ (slot.status === 'disabled') || (slot.available === 0) || (credits < slot.price)) ? 'disabled' : }}>Drop</button>
+                                        {% if drinkadmin %}
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
