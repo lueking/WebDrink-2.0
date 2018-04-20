@@ -24,7 +24,7 @@ define("OIDC_CLIENT_SECRET", $get_data(getenv("OIDC_CLIENT_SECRET"), ''));
 //LDAP configuration
 define("LDAP_USER", $get_data(getenv("LDAP_USER"), ''));
 define("LDAP_PASS", $get_data(getenv("LDAP_PASS"), ''));
-define("LDAP_APP", filter_var($get_data(getenv("LDAP_APP"), false), FILTER_VALIDATE_BOOLEAN));
+define("LDAP_APP", filter_var($get_data(getenv("LDAP_APP"), true), FILTER_VALIDATE_BOOLEAN));
 define("LDAP_HOST", $get_data(getenv("LDAP_HOST"), 'csh-ds01.csh.rit.edu'));
 
 //Rate limit delays (one call per X seconds)
