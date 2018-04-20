@@ -31,7 +31,18 @@ $app->get('/', function (Request $request, Response $response, array $args){
                         'availible' => 1
                     ]
                 ]
+            ],
+            [
+            'display_name' => 'lil dink',
+            'slots' => [
+                [
+                    'name' => "drink's choicey choice",
+                    'price' => 1,
+                    'enabled' => true,
+                    'availible' => 1
+                ]
             ]
+        ]
         ]
 
     ];

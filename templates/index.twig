@@ -86,13 +86,13 @@
                                 <th>Item</th>
                                 <th>Price</th>
                                 <th class="actions">Actions</th>
-                            <tr class={{ slot.enabled ? 'enabled' : 'disabled' }} >
+                            <tr>
                                 {% for slot in machine.slots %}
                                     <td>{{ slot.name  }}</td>
                                     <td>{{ slot.price }}</td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal">Drop</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ slot.enabled ? 'enabled' : 'disabled' }}>Drop</button>
                                         {% if drinkadmin %}
                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
                                         {% endif %}
