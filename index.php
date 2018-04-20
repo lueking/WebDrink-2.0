@@ -31,4 +31,9 @@ require __DIR__ . '/src/middleware.php';
 require __DIR__ . '/src/routes.php';
 
 // Run app
-$app->run();
+try{
+    $app->run();
+} catch (\Exception $exception){
+    die($exception->getMessage());
+}
+

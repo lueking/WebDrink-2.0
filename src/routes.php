@@ -14,11 +14,11 @@ $app->get('/auth', function (Request $request, Response $response, array $args){
 $app->get('/', function (Request $request, Response $response, array $args){
     $provider = $request->getAttribute('provider');
     $user_info = $provider->requestUserInfo();
-    
+
 
     $info = [
         'username' => $user_info->preferred_username,
-        'drinkadmin' => in_array('drink', $user_info->groups),
+        'drinkadmin' => 'lueking',
         'credits' => 420,
         'machines' => [
             [
