@@ -14,8 +14,7 @@ $app->get('/auth', function (Request $request, Response $response, array $args){
 $app->get('/', function (Request $request, Response $response, array $args){
     $provider = $request->getAttribute('provider');
     $user_info = $provider->requestUserInfo();
-
-    $ldap = new WebDrink\Utils\LDAP();
+    
 
     $info = [
         'username' => $user_info->preferred_username,
