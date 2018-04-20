@@ -20,7 +20,7 @@ $app->get('/', function (Request $request, Response $response, array $args){
     $info = [
         'username' => $user_info->preferred_username,
         'drinkadmin' => in_array('drink', $user_info->groups),
-        'credits' => $ldap->ldap_lookup_uid($user_info->preferred_username, ['drinkBalance']),
+        'credits' => 420,
         'machines' => [
             [
                 'display_name' => 'big dronk',
