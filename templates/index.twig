@@ -62,7 +62,7 @@
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item navbar-user dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" id="user01">
-                    <img src="https://profiles.csh.rit.edu/image/test">
+                    <img src="https:/profiles.csh.rit.edu/image/test">
                     Testing Tester
                 </a>
             </li>
@@ -92,7 +92,7 @@
                                     <td>{{ slot.price }}</td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ (slot.status === 'disabled') || (slot.available === 0) || (credits < slot.price)) ? 'disabled' : }}>Drop</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ ((slot.status === 'disabled') || (slot.available === 0) || (credits < slot.price)) ? 'disabled' : }}>Drop</button>
                                         {% if drinkadmin %}
                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
                                         {% endif %}
