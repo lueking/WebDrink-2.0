@@ -16,7 +16,7 @@ class Machines {
     public function getMachineIDs(){
         $result = $this->db->query("select machine_id from machines");
 
-        $machineIDs = $result->fetch_all(MYSQLI_ASSOC);
+        $machineIDs = $result->fetch_all(1);
 
         $ids = [];
         foreach($machineIDs as $row){
@@ -29,7 +29,7 @@ class Machines {
     public function getMachineInfo(){
         $result = $this->db->query("select * from machines");
 
-        $info = $result->fetch_all(MYSQLI_ASSOC);
+        $info = $result->fetch_all(1);
 
         return $info;
     }
@@ -37,7 +37,7 @@ class Machines {
     public function getMachineSlots($machineid){
         $result = $this->db->query("select machine_id, slot_num, slots.item_id, item_name, item_price, available, status from slots join drink_items on slots.item_id = drink_items.item_id where machine_id = {$machineid};");
 
-        $machineinfo = $result->fetch_all(MYSQL_ASSOC);
+        $machineinfo = $result->fetch_all(1);
         return $machineinfo;
     }
 
