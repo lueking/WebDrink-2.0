@@ -15,7 +15,6 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $provider = $request->getAttribute('provider');
     $user_info = $provider->requestUserInfo();
 
-    $itemsAPI = new \WebDrink\API\Items();
     $machinesAPI = new \WebDrink\API\Machines();
 
 
@@ -24,10 +23,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
         'drinkadmin' => true,
         'credits' => 420,
         'machines' => $machinesAPI->getAllMachinesWithSlots(),
-        'items' => print_r($itemsAPI->listAll()),
-        'user' => print_r($user_info)
-
-
+        'user' => var_export($user_info)
     ];
 
 
