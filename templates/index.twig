@@ -86,19 +86,21 @@
                                 <th>Item</th>
                                 <th>Price</th>
                                 <th class="actions">Actions</th>
-                            <tr>
-                                {% for slot in machine.slots %}
-                                    <td>{{ slot.name  }}</td>
-                                    <td>{{ slot.price }}</td>
-
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ slot.enabled ? 'enabled' : 'disabled' }}>Drop</button>
-                                        {% if drinkadmin %}
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
-                                        {% endif %}
-                                    </td>
-                                {% endfor %}
                             </tr>
+                                {% for slot in machine.slots %}
+                                    <tr>
+                                        <td>{{ slot.name  }}</td>
+                                        <td>{{ slot.price }}</td>
+
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal" {{ slot.enabled ? '' : 'disabled' }}>Drop</button>
+                                            {% if drinkadmin %}
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
+                                            {% endif %}
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+
                         </table>
 
                     </div>
