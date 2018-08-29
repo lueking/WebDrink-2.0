@@ -17,11 +17,14 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
     $machinesAPI = new \WebDrink\API\Machines();
 
+    $ldap = new WebDrink\Utils\LDAP();
+
+    $data = $ldap->ldap_lookup_uid($user_info->preferred_username, ['drinkBalance']);
 
     $info = [
         'username' => $user_info->preferred_username,
-        'drinkadmin' => true,
-        'credits' => 420,
+        'drinkadmin' => in_array("drink", $user_info->groups),
+        'credits' => $data,
         'machines' => $machinesAPI->getAllMachinesWithSlots(),
         'user' => var_export($user_info)
     ];
