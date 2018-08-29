@@ -56,19 +56,19 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
 //api endpoints
 $app->group('/api', function () use ($app) {
-    $app->group('/drops', function () use ($app) {
-        require __DIR__ . '/routes/drops.php';
-    });
+//    $app->group('/drops', function () use ($app) {
+//        require __DIR__ . '/routes/drops.php';
+//    });
     $app->group('/items', function () use ($app) {
         require __DIR__ . '/routes/items.php';
     });
     $app->group('/machines', function () use ($app) {
         require __DIR__ . '/routes/machines.php';
     });
-    $app->group('/temps', function () use ($app) {
-        require __DIR__ . '/routes/temps.php';
-    });
-    $app->group('/users', function () use ($app) {
-        require __DIR__ . '/routes/users.php';
-    });
+//    $app->group('/temps', function () use ($app) {
+//        require __DIR__ . '/routes/temps.php';
+//    });
+//    $app->group('/users', function () use ($app) {
+//        require __DIR__ . '/routes/users.php';
+//    });
 });
