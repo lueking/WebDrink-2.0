@@ -40,9 +40,16 @@ class LDAP {
         try {
             // Make the search
             $filter = "(uid=" . $uid . ")";
+            print ("\nconn:");
             print (var_export($this->conn));
+
+            print ("\nuserDn:");
             print (var_export($this->userDn) );
+
+            print ("\nfilter:");
             print (var_export($filter) );
+
+            print ("\nfields:");
             print (var_export($fields) );
 
             if (is_array($fields)) {
