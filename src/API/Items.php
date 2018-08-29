@@ -26,7 +26,10 @@ class Items {
      */
     public function listAll(){
         $result = $this->db->query("select * from drink_items");
-        return $result;
+
+        $itemList = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $itemList;
     }
 
     public function add(){

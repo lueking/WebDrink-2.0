@@ -16,37 +16,17 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $user_info = $provider->requestUserInfo();
 
     $itemsAPI = new \WebDrink\API\Items();
+    $machinesAPI = new \WebDrink\API\Machines();
 
 
     $info = [
         'username' => $user_info->preferred_username,
         'drinkadmin' => true,
         'credits' => 420,
-        'machines' => [
-            [
-                'display_name' => 'big dronk',
-                'slots' => [
-                    [
-                        'name' => 'baaallls',
-                        'price' => 9001,
-                        'enabled' => true,
-                        'availible' => 1
-                    ]
-                ]
-            ],
-            [
-                'display_name' => 'lil dink',
-                'slots' => [
-                    [
-                        'name' => "drink's choicey choice",
-                        'price' => 1,
-                        'enabled' => true,
-                        'availible' => 1
-                    ]
-                ]
-            ]
-        ],
-        'items' => $itemsAPI->listAll()
+        'machines' => $machinesAPI->getAllMachinesWithSlots(),
+        'items' => print_r($itemsAPI->listAll()),
+        'user' => print_r($user_info)
+
 
     ];
 
