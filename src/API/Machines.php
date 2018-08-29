@@ -3,7 +3,6 @@
 namespace WebDrink\API;
 
 
-use function GuzzleHttp\Promise\exception_for;
 use WebDrink\Utils\Database;
 
 class Machines {
@@ -36,7 +35,8 @@ class Machines {
     }
 
     public function getMachineSlots($machineid){
-        $result = $this->db->query("select machine_id, display_name as machine_name, slot_num, slots.item_id, item_name, item_price, available, status from slots join drink_items on slots.item_id = drink_items.item_id where machine_id = {$machineid};");
+        $result = $this->db->query("select machine_id, slot_num, slots.item_id, item_name, item_price, available, status from slots join drink_items on slots.item_id = drink_items.item_id where machine_id = {$machineid};");
+
         $machineinfo = $result->fetch_all(MYSQL_ASSOC);
         return $machineinfo;
     }
