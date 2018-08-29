@@ -31,7 +31,7 @@ class Database {
         return $this->getDatabaseConnection()->query($query_string);
     }
 
-    private function __destruct() {
+    public function __destruct() {
         $connection = $this->db;
         $connection->close();
         $this->db = null;
