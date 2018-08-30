@@ -145,7 +145,7 @@
             <div class="modal-body">Are you sure you want to drop <span id="itemname"></span> from <span id="machinename"></span>?</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="dropLad">Drop!</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="dropLad">Drop!</button>
             </div>
         </div>
     </div>
@@ -168,6 +168,7 @@
             var modal = $(this);
             modal.find('.modal-body #itemname').text(name);
             modal.find('.modal-body #machinename').text(machine);
+            $("#dropModal").modal('show');
         });
 
         $("#dropLad").on("click", function () {
