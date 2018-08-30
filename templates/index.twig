@@ -134,7 +134,7 @@
                 <h4 class="modal-title">Drop confirmation</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
-            <div class="modal-body">Are you sure you want to drop <div id="itemname"></div> from <div id="machinename"></div>?</div>
+            <div class="modal-body">Are you sure you want to drop <span id="itemname"></span> from <span id="machinename"></span>?</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="dropLad">Drop!</button>
@@ -168,7 +168,7 @@
 
         $("#dropLad").on("click", function () {
            $.post("http://webdrink-api-webdrink-server.a.csh.rit.edu/v2/drop/" + ibutton + "/" + machineid + "/" + slot + "/0", function (data) {
-               console.log({"ibutton": ibutton, "machineid": machineid, "slot": slot})
+               console.log({"ibutton": ibutton, "machineid": machineid, "slot": slot});
                console.log(data)
            });
         });
