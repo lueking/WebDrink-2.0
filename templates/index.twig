@@ -20,10 +20,10 @@
     <script type="text/javascript" src="js/app/settings.js"></script>
 
     {% if drinkadmin %}
-    <script type="text/javascript" src="js/admin/users.js"></script>
-    <script type="text/javascript" src="js/admin/items.js"></script>
-    <script type="text/javascript" src="js/admin/temps.js"></script>
-    <script type="text/javascript" src="js/admin/logs.js"></script>
+        <script type="text/javascript" src="js/admin/users.js"></script>
+        <script type="text/javascript" src="js/admin/items.js"></script>
+        <script type="text/javascript" src="js/admin/temps.js"></script>
+        <script type="text/javascript" src="js/admin/logs.js"></script>
     {% endif %}
 
     <!-- Bootstrap core CSS -->
@@ -78,7 +78,7 @@
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item navbar-user dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" id="{{ username }}">
-                    <img src="https://profiles.csh.rit.edu/user/{{username}}">
+                    <img src="https://profiles.csh.rit.edu/user/{{ username }}">
                     {{ username }} ({{ credits }} credits)
                 </a>
             </li>
@@ -109,9 +109,17 @@
                                     <td>{{ slot.price }}</td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-drop" data-machineid="{{ machine.machine_id }}" data-machinename="{{ machine.display_name }}" data-slot="{{ slot.slot }}" data-itemname="{{ slot.name }}" data-toggle="modal" data-target="dropModal" {{ slot.enabled and (slot.available > 0) ? '' : 'disabled' }}>Drop</button>
+                                        <button type="button" class="btn btn-primary btn-drop"
+                                                data-machineid="{{ machine.machine_id }}"
+                                                data-machinename="{{ machine.display_name }}"
+                                                data-slot="{{ slot.slot }}"
+                                                data-itemname="{{ slot.name }}" {{ slot.enabled and (slot.available > 0) ? '' : 'disabled' }}>
+                                            Drop
+                                        </button>
                                         {% if drinkadmin %}
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
+                                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                                    data-target="#editSlotModal">EDIT
+                                            </button>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -151,8 +159,8 @@
     var slot;
 
     $(document).ready(function () {
-        $('#dropModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
+        $(".btn-drop").on("click", function () {
+            var button = $(this);
             var machine = button.data('machinename');
             machineid = button.data('machineid');
             slot = button.data('slot');
@@ -162,15 +170,14 @@
             modal.find('.modal-body #machinename').text(machine);
         });
 
-        $(".btn-drop").on("click", function () {
-            $("#dropModal").modal('show');
-        });
-
         $("#dropLad").on("click", function () {
-           $.post("http://webdrink-api-webdrink-server.a.csh.rit.edu/v2/drop/" + ibutton + "/" + machineid + "/" + slot + "/0", function (data) {
-               console.log({"ibutton": ibutton, "machineid": machineid, "slot": slot});
-               console.log(data)
-           });
+            $.ajax({
+                url: "https://drinkapi.csh.rit.edu/v2/drops/drop/" + ibutton + "/" + machineid + "/" + slot + "/0"
+                data: {"api_key": "9f67fdd194e65aac"},
+                dataType: 'jsonp',
+                crossDomain: true,
+                success: function (data) {console.log({"ibutton": ibutton, "machineid": machineid, "slot": slot, "data": data});}
+            });
         });
     });
 
