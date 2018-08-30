@@ -165,10 +165,10 @@
             machineid = button.data('machineid');
             slot = button.data('slot');
             var name = button.data('itemname');
-            var modal = $(this);
+            var modal = $("#dropModal");
             modal.find('.modal-body #itemname').text(name);
             modal.find('.modal-body #machinename').text(machine);
-            $("#dropModal").modal('show');
+            modal.modal('show');
         });
 
         $("#dropLad").on("click", function () {
