@@ -20,13 +20,14 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $ldap = new WebDrink\Utils\LDAP();
 
     $credits = $ldap->ldap_lookup_uid($user_info->preferred_username, ['drinkBalance'])[0]['drinkbalance'][0];
+    $ibutton = $ldap->ldap_lookup_uid($user_info->preferred_username, ['ibutton'])[0]['ibutton'][0];
 
     $info = [
         'username' => $user_info->preferred_username,
         'drinkadmin' => in_array("drink", $user_info->groups),
         'credits' => $credits,
         'machines' => $machinesAPI->getAllMachinesWithSlots(),
-        'user' => var_export($user_info)
+        'ibutton' => $ibutton
     ];
 
 

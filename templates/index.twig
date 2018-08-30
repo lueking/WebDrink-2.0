@@ -14,6 +14,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="js/app/app.js"></script>
+    <script type="text/javascript" src="js/app/machines.js"></script>
+    <script type="text/javascript" src="js/app/drops.js"></script>
+    <script type="text/javascript" src="js/app/settings.js"></script>
+
+    {% if drinkadmin %}
+    <script type="text/javascript" src="js/admin/users.js"></script>
+    <script type="text/javascript" src="js/admin/items.js"></script>
+    <script type="text/javascript" src="js/admin/temps.js"></script>
+    <script type="text/javascript" src="js/admin/logs.js"></script>
+    {% endif %}
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet"
           href="https://s3.csh.rit.edu/csh-material-bootstrap/4.0.0/dist/csh-material-bootstrap.min.css" media="screen">
@@ -49,8 +61,9 @@
                 <li class="nav-item">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">Admin<span
-                                        class="caret"></span></a>
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                                Admin<span class="caret"></span>
+                            </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/users">Users</a>
                                 <a class="dropdown-item" href="/items">Items</a>
@@ -65,10 +78,9 @@
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item navbar-user dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" id="{{ username }}">
-                    <img src="https:/profiles.csh.rit.edu/image/{{ username }}">
-                    {{ username }}
+                    <img src="https:/profiles.csh.rit.edu/user/{{username}}">
+                    {{ username }} Credits: {{ credits }}
                 </a>
-                {{ credits }} credits
             </li>
         </ul>
     </div>
@@ -97,13 +109,10 @@
                                     <td>{{ slot.price }}</td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#selectModal" {{ slot.enabled ? '' : 'disabled' }}>Drop
-                                        </button>
+                                        <button type="button" class="btn btn-primary drop" data-toggle="modal" data-target="#selectModal"{{ slot.enabled and slot.available ? '' : 'disabled' }}>Drop</button>
                                         {% if drinkadmin %}
-                                            <button type="button" class="btn btn-info" data-toggle="modal"
-                                                    data-target="#editSlotModal">EDIT
-                                            </button>{% endif %}
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSlotModal">EDIT</button>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -115,7 +124,6 @@
             </div>
         {% endfor %}
     </div>
-    {{ user }}
 </div>
 
 
