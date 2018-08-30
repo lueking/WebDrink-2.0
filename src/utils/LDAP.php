@@ -32,7 +32,6 @@ class LDAP {
             throw new Exception("BAAAD");
         } else {
             $this->conn = $conn;
-            print("Successful LDAP Connection");
         }
     }
 

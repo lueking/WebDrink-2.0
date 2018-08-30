@@ -173,7 +173,7 @@
 
         $("#dropLad").on("click", function () {
             $.ajax({
-                url: "https://drinkapi.csh.rit.edu/v2/drops/drop/" + ibutton + "/" + machineid + "/" + slot + "/0",
+                url: "/api/drops/drop/" + ibutton + "/" + machineid + "/" + slot + "/0",
                 data: {"api_key": "9f67fdd194e65aac"},
                 type: 'POST',
                 dataType: 'jsonp',

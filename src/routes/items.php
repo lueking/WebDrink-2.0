@@ -19,7 +19,8 @@ $items = new WebDrink\API\Items();
  * returns a list of the available drink machines
  */
 $app->get("/list", function (Request $request, Response $response, array $args){
-    return $response->withStatus(200);
+    $items = new WebDrink\API\Items();
+    return $items->listAll();
 });
 
 /**

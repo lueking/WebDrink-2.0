@@ -26,8 +26,8 @@ class Machines {
         return $ids;
     }
 
-    public function getMachineInfo(){
-        $result = $this->db->query("select * from machines");
+    public function getMachineInfo($id = null){
+        $result = $this->db->query("select * from machines" . (is_null($id) ? "" : " where id = {$id}"));
 
         $info = $result->fetch_all(1);
 
