@@ -36,9 +36,9 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
 //api endpoints
 $app->group('/api', function () use ($app) {
-//    $app->group('/drops', function () use ($app) {
-//        require __DIR__ . '/routes/drops.php';
-//    });
+    $app->group('/drops', function () use ($app) {
+        require __DIR__ . '/routes/drops.php';
+    });
     $app->group('/items', function () use ($app) {
         require __DIR__ . '/routes/items.php';
     });

@@ -67,9 +67,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
     // Check for machine_id and convert to machine_alias
     if (isset($machine_id)) {
         $machine_alias = $machines[$machine_id];
-        if (!is_null($machine_alias)){
-            $machine_alias = $machine_alias;
-        } else {
+        if (is_null($machine_alias)){
             return $response->withStatus(400, "Invalid 'machine_id' (/drops/drop)");
         }
     } else {
