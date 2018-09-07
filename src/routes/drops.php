@@ -94,7 +94,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
     try {
         $elephant->init();
         $elephant->emit('ibutton', ['ibutton' => $ibutton]);
-        $elephant->on('ibutton_recv', function ($data) use ($machine_id, $machine_alias, $slot_num, $delay, $api, $response, $elephant, &$output) {
+        $elephant->on('ibutton_recv', function ($data) use ($machine_id, $machine_alias, $slot_num, $delay, $response, $elephant, &$output) {
             $success = explode(":", $data);
             $success = $success[0];
 
@@ -102,14 +102,14 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
             if ($success === "OK") {
                 // Connect to the drink machine
                 $elephant->emit('machine', ['machine_id' => $machine_alias]);
-                $elephant->on('machine_recv', function ($data) use ($machine_id, $machine_alias, $response, $api, $slot_num, $delay, $elephant, &$output) {
+                $elephant->on('machine_recv', function ($data) use ($slot_num, $delay, $elephant, &$output) {
                     $success = explode(":", $data);
                     $success = $success[0];
 
                     if ($success === "OK") {
                         // Drop the drink
                         $elephant->emit('drop', ['slot_num' => $slot_num, 'delay' => $delay]);
-                        $elephant->on('drop_recv', function ($data) use ($machine_id, $slot_num, $machine_alias, $api, $response, $elephant, &$output) {
+                        $elephant->on('drop_recv', function ($data) use ($elephant, &$output) {
                             $success = explode(":", $data);
                             $success = $success[0];
 
