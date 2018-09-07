@@ -83,9 +83,9 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
 
     // Connect to the Drink Server through a websocket
     if (DEBUG && USE_LOCAL_DRINK_SERVER) {
-        $elephant = new ElephantIO\Client(LOCAL_DRINK_SERVER_URL, "socket.io", 1, false, true, true);
+        $elephant = new ElephantIO\Client(LOCAL_DRINK_SERVER_URL, "socket.io", 1, false, false, true);
     } else {
-        $elephant = new ElephantIO\Client(DRINK_SERVER_URL, "socket.io", 1, false, true, true);
+        $elephant = new ElephantIO\Client(DRINK_SERVER_URL, "socket.io", 1, false, false, true);
     }
 
     // Default output if failure
