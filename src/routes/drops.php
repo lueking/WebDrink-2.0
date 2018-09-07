@@ -74,11 +74,12 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
         return $response->withStatus(400, "Invalid 'machine_id' (/drops/drop)");
     }
 
-    // Check if rate limited
-    $rateLimitDelay = RATE_LIMIT_DROPS_DROP;
-    if ($this->_isRateLimited("/drops/drop", $rateLimitDelay, $machine_alias)) {
-        return $response->withStatus(400, "Cannon exceed one call per {$rateLimitDelay} seconds (/drops/drop)");
-    }
+    //FUCK rate limiting
+//    // Check if rate limited
+//    $rateLimitDelay = RATE_LIMIT_DROPS_DROP;
+//    if ($this->_isRateLimited("/drops/drop", $rateLimitDelay, $machine_alias)) {
+//        return $response->withStatus(400, "Cannon exceed one call per {$rateLimitDelay} seconds (/drops/drop)");
+//    }
 
     // Connect to the Drink Server through a websocket
     if (DEBUG && USE_LOCAL_DRINK_SERVER) {
