@@ -133,7 +133,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
             $elephant->keepAlive();
         });
     } catch (Exception $e) {
-        $output = [$e->getMessage() . " (/drops/drop)", 500];
+        $output = [$e->getMessage() . " (/drops/drop)" . var_export([$machine_id, $machine_alias, $slot_num, $delay]), 500];
     }
 
     $elephant->close();
