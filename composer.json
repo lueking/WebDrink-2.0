@@ -12,7 +12,8 @@
     },
     "autoload": {
         "psr-4": {
-          "WebDrink\\" : "src/"
+          "WebDrink\\" : "src/",
+          "ElephantIO\\" : "lib/elephant.io-2.0.4/"
         }
     },
     "config": {
