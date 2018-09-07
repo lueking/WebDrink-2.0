@@ -176,7 +176,6 @@
                 url: "/api/drops/drop/" + ibutton + "/" + machineid + "/" + slot + "/0",
                 data: {"api_key": "9f67fdd194e65aac"},
                 type: 'POST',
-                dataType: 'jsonp',
                 crossDomain: true,
                 success: function (data) {console.log({"ibutton": ibutton, "machineid": machineid, "slot": slot, "data": data});}
             });
