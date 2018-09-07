@@ -137,6 +137,6 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
     }
 
     $elephant->close();
-    return $response->withStatus($output[0], $output[1]);
+    return $response->withStatus($output[1], $output[0]);
 });
 
